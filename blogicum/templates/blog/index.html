@@ -2,11 +2,8 @@
   {% block title %}
     <title>Лента записей</title>
   {% endblock %}
-
   {% block content %}
-    <div class="container py-5">
       <h1>Лента записей</h1>                        
-      <!-- Перебираем в цикле все посты -->
       {% for post in context reversed %}
         <hr>
         <article>
@@ -21,7 +18,6 @@
               Категория: <a href="category/{{ post.category }}">{{ post.category }}</a>
             </li>
           </ul>          
-          <!-- Первые 10 слов -->
           <p>
             {{ post.text|truncatewords:10 }}
           </p>
