@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 
@@ -50,8 +51,10 @@ def index(request):
 
 
 def post_detail(request, id):
-    context = {'post': posts[id]}
-    return render(request, 'blog/detail.html', context)
+    list_of_ids = [index.get('id') for index in posts]
+    if id not in list_of_ids:
+        raise Http404(f'Запрошенный пост №{id} отсутствует.')
+    return render(request, 'blog/detail.html', {'post': posts[id]})
 
 
 def category_posts(request, category_slug):
