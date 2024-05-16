@@ -45,14 +45,15 @@ posts = [
     },
 ]
 
+posts_ids = [index.get('id') for index in posts]
+
 
 def index(request):
     return render(request, 'blog/index.html', {'context': posts})
 
 
 def post_detail(request, id):
-    list_of_ids = [index.get('id') for index in posts]
-    if id not in list_of_ids:
+    if id not in posts_ids:
         raise Http404(f'Запрошенный пост №{id} отсутствует.')
     return render(request, 'blog/detail.html', {'post': posts[id]})
 
